@@ -1,19 +1,21 @@
 #include "Ptak.h"
+#include "config.h"
 #include "HelloWorldScene.h"
 
 Ptak::Ptak()
 {
     initWithSpriteFrameName("bird1.png");
-    this->runAction(Lot());
-    status = Idle;
+    this->runAction(Latanie());
+	status = Bezczyn;
+    
 }
 
-RepeatForever* Ptak::Lot()
+RepeatForever* Ptak::Latanie()
 {
-    int numframe = 3;
+    int a = 3;
     Vector<SpriteFrame*> animFrames;
     char str[100] = {0};
-    for(int i = 0; i < numframe; i++)
+    for(int i = 0; i < a; i++)
     {
         sprintf(str, "bird%d.png", i+1);
         auto frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(str);
@@ -21,17 +23,20 @@ RepeatForever* Ptak::Lot()
     }
     auto animation = Animation::createWithSpriteFrames(animFrames, 0.05);
     Animate* animate = Animate::create(animation);
-    
     return RepeatForever::create(animate);
 }
 
-void Ptak::tap() {
+void Ptak::Skok() {
 
-    status = Tap;  
+    status = Jump;
+   
 }
 
-void Ptak::hit()
+void Ptak::hitMe()
 {
-	status = Hit;
-	((HelloWorld*)getParent())->GameOver = true;
+    status = Uderz;
+    
+    ((HelloWorld*)getParent())->GameOver = true;
+    
 }
+

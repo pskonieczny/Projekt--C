@@ -22,27 +22,36 @@ void AppDelegate::initGLContextAttrs()
     GLView::setGLContextAttrs(glContextAttrs);
 }
 
+// If you want to use packages manager to install more packages, 
+// don't modify or remove this function
+static int register_all_packages()
+{
+    return 0; //flag for packages manager
+}
+
 bool AppDelegate::applicationDidFinishLaunching() {
     // initialize director
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
-        glview = GLViewImpl::createWithRect("Flappy", Rect(0, 0, 960, 640));
+        glview = GLViewImpl::create("My Game");
         director->setOpenGLView(glview);
     }
 
-    director->getOpenGLView()->setDesignResolutionSize(960, 640, ResolutionPolicy::SHOW_ALL);
-
+    //set design solution (auto zoom fit on any screen size...)
+    glview->setDesignResolutionSize(320, 480, ResolutionPolicy::EXACT_FIT);
+    director->setContentScaleFactor(1);
+    
     // turn on display FPS
     director->setDisplayStats(true);
 
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);
 
-    FileUtils::getInstance()->addSearchPath("res");
+    register_all_packages();
 
     // create a scene. it's an autorelease object
-    auto scene = HelloWorld::Stworzscene();
+    auto scene = HelloWorld::Scena();
 
     // run
     director->runWithScene(scene);

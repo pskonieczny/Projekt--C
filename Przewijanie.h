@@ -1,5 +1,5 @@
-#ifndef __FlappyBird__MoveLoop__
-#define __FlappyBird__MoveLoop__
+#ifndef __FlappyBird__MoveLeft__
+#define __FlappyBird__MoveLeft__
 #define ZiemiaP 15 
 #define Przewwleft 0.3 
 #define Dllotu 0.05 
@@ -12,14 +12,17 @@
 
 using namespace cocos2d;
 
-class Petla : public Component
+class PrzewLewo : public Component
 {
 public:
-    Petla();
+    PrzewLewo(float w);
 private:
-    virtual void Wejscie();
+    float w;
+    virtual void Wpis();
     virtual void update(float delta);
-    void AkcjaRuch();
+    
+    void Akcjaruchu();
+    
 };
 
 #endif

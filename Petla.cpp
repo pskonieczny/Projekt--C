@@ -1,17 +1,16 @@
 #include "Petla.h"
+#include "config.h"
 #include "HelloWorldScene.h"
-
-#define Szybkosc 15
 
 Petla::Petla()
 {
-    setName("Petla");
+    setName("MoveLoop");
     
 }
 
-void Petla::Wpisanie()
+void Petla::Wejscie()
 {
-    Ruch();
+    AkcjaRuch();
 }
 
 void Petla::update(float delta)
@@ -25,14 +24,14 @@ void Petla::update(float delta)
     }
 }
 
-void Petla::Ruch()
+void Petla::AkcjaRuch()
 {
     Node* parent = (Node*)getOwner();
     if (parent == NULL) return;
-    float w = parent->boundingBox().size.width / Szybkosc;
+    float w = parent->boundingBox().size.width / ZiemiaP;
+    MoveBy* moveleft = MoveBy::create(Przewwleft, Point(-w, 0));
     MoveBy* moveright = MoveBy::create(0, Point(w, 0));
-    RepeatForever* repeat = RepeatForever::create(Sequence::create(moveright, NULL));
-    
-    parent->runAction(repeat);
+    RepeatForever* repeat = RepeatForever::create(Sequence::create(moveleft, moveright, NULL));
+        parent->runAction(repeat);
     
 }

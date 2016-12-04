@@ -1,5 +1,5 @@
-#ifndef __FlappyBird__MoveLoop__
-#define __FlappyBird__MoveLoop__
+#ifndef __FlappyBird__AddPipe__
+#define __FlappyBird__AddPipe__
 #define ZiemiaP 15 
 #define Przewwleft 0.3 
 #define Dllotu 0.05 
@@ -8,18 +8,22 @@
 #define Wysspadania 127
 #define TimePrzeszkody 2
 #define Timeprzesz 80
+
 #include <cocos2d.h>
+#include "HelloWorldScene.h"
 
 using namespace cocos2d;
 
-class Petla : public Component
+
+
+class Przeszkoda : public Component
 {
 public:
-    Petla();
-private:
-    virtual void Wejscie();
+    Przeszkoda();
+private:   
+    HelloWorld* parent; 
+    float dl;
     virtual void update(float delta);
-    void AkcjaRuch();
 };
 
 #endif
